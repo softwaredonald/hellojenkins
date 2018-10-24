@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'windows'}
+    agent {label 'ubuntu'}
     stages {
         stage('---clean---') {
             steps {
