@@ -31,7 +31,7 @@ pipeline{
         }
         stage('package'){
             parallel {
-                stage('package on windows){
+                stage('package on windows'){
                     agent {
                         label "windows"
                     }
