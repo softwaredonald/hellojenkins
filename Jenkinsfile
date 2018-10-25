@@ -21,7 +21,7 @@ pipeline{
                 }
                 stage('Test on Linux'){
                     agent{
-                        label "linux"
+                        label "ubuntu"
                     }
                     steps {
                         sh "mvn test"
