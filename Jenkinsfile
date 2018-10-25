@@ -23,7 +23,7 @@ pipeline{
                     agent{
                         label "linux"
                     }
-                    step{
+                    steps {
                         sh "mvn test"
                     }
                 }
