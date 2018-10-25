@@ -1,7 +1,7 @@
 pipeline{
     agent none
     stages{
-        stage('clean on feature 1'){
+        stage('clean on feature 2'){
             agent{
                 label "ubuntu"
             }
@@ -9,9 +9,9 @@ pipeline{
                 sh "mvn clean"
             }
         }
-        stage('test on feature 1'){
+        stage('test on feature 2'){
             parallel {
-                stage('Test on windows on feature 1'){
+                stage('Test on windows on feature 2'){
                     agent {
                         label "windows"
                     }
@@ -19,7 +19,7 @@ pipeline{
                         powershell "mvn test"
                     }
                 }
-                stage('Test on Linux on feature 1'){
+                stage('Test on Linux on feature 2'){
                     agent{
                         label "ubuntu"
                     }
@@ -29,9 +29,9 @@ pipeline{
                 }
             }
         }
-        stage('package on feature 1'){
+        stage('package on feature 2'){
             parallel {
-                stage('package on windows on feature 1'){
+                stage('package on windows on feature 2'){
                     agent {
                         label "windows"
                     }
@@ -39,7 +39,7 @@ pipeline{
                         powershell "mvn package"
                     }
                 }
-                stage('package on ubuntu on feature 1'){
+                stage('package on ubuntu on feature 2'){
                     agent {
                         label "ubuntu"
                     }
