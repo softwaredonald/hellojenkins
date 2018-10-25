@@ -30,11 +30,23 @@ pipeline{
             }
         }
         stage('package'){
-            agent {
-                label "windows"
-            }
-            steps{
-                powershell "mvn package"
+            parallel {
+                stage('package on windows){
+                    agent {
+                        label "windows"
+                    }
+                    steps {
+                        powershell "mvn package"
+                    }
+                }
+                stage('package on ubuntu'){
+                    agent {
+                        label "ubuntu"
+                    }
+                    steps {
+                        sh "mvn package"
+                    }
+                }
             }
         }
     }
