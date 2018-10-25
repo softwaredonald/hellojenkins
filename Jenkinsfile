@@ -1,19 +1,40 @@
 pipeline {
-    agent {label 'windows'}
+    agent none
     stages {
         stage('---clean---') {
+            agent {
+                label'ubuntu'
+            }
             steps {
-                powershell "mvn clean"
+                sh "mvn clean"
             }
         }
         stage('--test--') {
-            steps {
-                powershell "mvn test"
+            parallel linux:{
+                node('ubuntu1804'){
+                    steps {
+                        sh "mvn test"
+                    }
+                }           
+            },
+            windows:{
+                node('windows'){
+                    powershell "mvn test"
+                }
             }
         }
         stage('--package--') {
-            steps {
-                powershell "mvn package"
+            parallel linux:{
+                node('ubuntu1804'){
+                    steps {
+                        sh "mvn package"
+                    }
+                }           
+            },
+            windows:{
+                node('windows'){
+                    powershell "mvn package"
+                }
             }
         }
     }
